@@ -1,0 +1,465 @@
+
+body {
+  margin: 0;
+  font-family: Helvetica;
+}
+
+[v-cloak] {
+  display: none;
+}
+
+.positioner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 90%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+
+  font-size: 1.35em;
+}
+
+#app {
+  display: grid;
+  grid-template-rows: 18vh auto 5vh;
+  grid-template-columns: 20% auto;
+  grid-template-areas: 
+    "header header"
+    ". content"
+    ". ."
+  ;
+}
+
+#header {
+  z-index: 1;
+  grid-area: header;
+  /*background-color: #EFE6DD;*/
+  display: grid;
+  grid-template-rows: 1.2fr 2px 1fr 2px;
+  grid-template-columns: 20% auto 20%;
+  grid-template-areas:
+    "headerTop headerTop headerTop"
+    "sepA sepA sepA"
+    "headerLeft . headerRight"
+    "sepB sepB sepB"
+  ;
+
+  height: 100%;
+  width: 100%;
+
+  background-color: #335C81; 
+}
+
+#header .sep {
+  background-color: black;
+  width: 100%;
+  height: 100%;
+}
+
+#header #sepA {
+  grid-area: sepA;
+}
+#header #sepB {
+  grid-area: sepB;
+}
+
+#headerTop {
+  position: relative;
+  grid-area: headerTop;
+  background-color: #5899E2;
+}
+
+#headerTop h1 {
+  margin: 0px;
+}
+
+#headerTop h1  a {
+  grid-area: headerTop;
+  text-align: center;
+  text-decoration: none;
+  color: black;
+}
+
+#headerTop .positioner {
+  font-size: 0.9em;
+}
+
+#headerLeft {
+  grid-area: headerLeft;
+  border-right: 2px solid black;
+}
+
+#headerRight {
+  grid-area: headerRight;
+  border-left: 2px solid black;
+}
+
+.navigation {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-rows: auto;
+  grid-template-columns: repeat(2, 50%);
+}
+
+.navigation > a {
+  justify-self: stretch;
+  align-self: stretch;
+  position: relative;
+
+  text-decoration: none;
+  color: #BB4430;
+}
+
+.navigation > a:hover {
+  background-color: #F3DFA2;
+}
+
+.navigation > a[on] {
+  background-color: #001547;
+}
+
+.navigation > a > div {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+
+
+h1,h2,h3,h4,h5,h6 {
+  text-align: center;
+}
+
+#content {
+  z-index: 1;
+  grid-area: content;
+  background-color: white;
+}
+
+#content .book {
+  width: 90%;
+  height: 150px;
+  margin: 0% 5%;
+
+  background-color: #e0aa74;
+  border: 2px solid black;
+
+  display: grid;
+  grid-template-columns: repeat(2, 50%);
+  grid-template-rows: repeat(2, 50%);
+  grid-template-areas: 
+    "title author"
+    "genres genres"
+  ;
+  /*overflow: scroll;*/
+}
+
+#content .book:hover {
+  background-color: #630000;
+}
+
+#content .book > .title {
+  grid-area: title;
+  position: relative;
+}
+
+#content .book > .author {
+  grid-area: author;
+  position: relative;
+}
+
+#content .book > .genres {
+  grid-area: genres;
+  position: relative;
+}
+
+#content .awayBook {
+  width: 90%;
+  height: 150px;
+  margin: 0% 5%;
+
+  background-color: #e0aa74;
+  border: 2px solid black;
+
+  display: grid;
+  grid-template-columns: repeat(2, 33%);
+  grid-template-rows: repeat(2, 50%);
+  grid-template-areas: 
+    "title author friend"
+    "genres genres genres"
+  ;
+  /*overflow: scroll;*/
+}
+
+#content .awayBook:hover {
+  background-color: #630000;
+}
+
+#content .awayBook > .title {
+  grid-area: title;
+  position: relative;
+}
+
+#content .awayBook > .author {
+  grid-area: author;
+  position: relative;
+}
+
+#content .awayBook > .friend {
+  grid-area: friend;
+  position: relative;
+}
+
+#content .awayBook > .genres {
+  grid-area: genres;
+  position: relative;
+}
+
+
+
+#content .friend-wrapper {
+  width: 90%;
+  margin: 0% 5%;
+}
+
+#content .friend-wrapper > .friend {
+  width: 100%;
+  height: 150px;
+
+  background-color: #4fff7b;
+  border: 2px solid black;
+
+  display: grid;
+  grid-template-columns: repeat(2, 50%);
+  grid-template-rows: auto;
+  grid-template-areas: 
+    "name numBooks"
+  ;
+}
+
+#content .friend-wrapper > .friend:hover {
+  background-color: #630000;
+}
+
+#content .friend-wrapper > .friend > .name {
+  grid-area: name;
+  position: relative;
+}
+
+#content .friend-wrapper > .friend > .numBooks {
+  grid-area: numBooks;
+  position: relative;
+}
+
+#content .friend-wrapper .awayBook {
+  width: 100%;
+  margin: 0;
+}
+
+
+
+
+#content .adminBookContainer {
+  width: 90%;
+  margin: 0% 5%;
+
+  display: grid;
+  grid-template-rows: auto;
+  grid-template-columns: 90% 10%;
+  grid-template-areas: 
+    "book buttons"
+  ;
+
+  border: 2px solid black;
+}
+
+#content .friend-wrapper .adminBookContainer {
+  width: 100%;
+  margin: 0;
+}
+
+#content .adminBookContainer .book, #content .adminBookContainer .awayBook {
+  width: 100%;
+  margin: 0;
+  grid-area: book;
+
+  border: none;
+}
+
+#content .adminBookContainer:hover .book, #content .adminBookContainer:hover .awayBook {
+  background-color: #630000;
+}
+
+#content .adminBookContainer .awayBook {
+  width: 100%;
+  margin: 0;
+  grid-area: book;
+
+  border: none;
+}
+
+#content .adminBookContainer .buttons {
+  grid-area: buttons;
+  background-color: #001547;
+  width: 100%;
+  height: 100%;
+
+  position: relative;
+  color: #BB4430;
+  /*color: white;*/
+}
+
+
+#content .adminFriendContainer {
+  width: 100%;
+  height: 150px;
+  /*margin: 0% 5%;*/
+
+  display: grid;
+  grid-template-rows: auto;
+  grid-template-columns: 90% 10%;
+  grid-template-areas: 
+    "friend buttons"
+  ;
+
+  border: 2px solid black;
+}
+
+
+#content .friend-wrapper > .adminFriendContainer > .friend {
+  width: 100%;
+  height: 100%;
+
+  background-color: #4fff7b;
+
+  grid-area: friend;
+  display: grid;
+  grid-template-columns: repeat(2, 50%);
+  grid-template-rows: auto;
+  grid-template-areas: 
+    "name numBooks"
+  ;
+}
+
+#content .friend-wrapper > .adminFriendContainer > .friend:hover {
+  background-color: #630000;
+}
+
+#content .friend-wrapper > .adminFriendContainer > .friend > .name {
+  grid-area: name;
+  position: relative;
+}
+
+#content .friend-wrapper > .adminFriendContainer > .friend > .numBooks {
+  grid-area: numBooks;
+  position: relative;
+}
+
+#content .friend-wrapper > .adminFriendContainer > .buttons {
+  font-size: 0.9em;
+  grid-area: buttons;
+  background-color: #001547;
+  width: 100%;
+  height: 100%;
+
+  position: relative;
+  color: #BB4430;
+  /*color: white;*/
+}
+
+
+#sidebar {
+  z-index: 2;
+  position: fixed;
+  top: 18vh;
+  width: 20%;
+  height: 77vh;
+
+  background-color: teal;
+  border: 2px solid black;
+
+  display: grid;
+  grid-template-rows: min-content 3% 1fr 5%;
+  grid-template-columns: 5% 1fr 5%;
+  grid-template-areas: 
+    ". searchDiv ."
+    ". . ."
+    ". cover ."
+    ". . ."
+  ;
+}
+
+#sidebar > #searchDiv {
+  grid-area: searchDiv;
+  width: 100%;
+  height: 100%;
+}
+
+#sidebar > #searchDiv .header {
+  text-align: center; 
+  margin: 5px 0px;
+}
+
+#sidebar > #searchDiv .container {
+  /*width:100%; */
+  /*margin: auto; */
+}
+
+#sidebar > #searchDiv .container label {
+  font-size: 0.85em;
+}
+
+#sidebar > #cover-wrapper {
+  position: relative;
+  grid-area: cover;
+  width: 100%;
+  height: 100%;
+}
+
+#cover {
+  max-width: 100%;
+  max-height: 100%;
+  border: 2px solid black;
+}
+
+
+
+#lend {
+  z-index: 3;
+  position: fixed;
+  width: 40vw;
+  height: 40vh;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  background-color: red;
+  border: 4px solid black;
+}
+
+#lend select {
+  /*width: 100px;*/
+  height: 27px;
+}
+
+#lend button {
+  padding: 8px;
+  border: 2px solid black;
+  background-color: #e0aa74;
+  color: #BB4430;
+  font-weight: bold;
+}
+
+#lend button:hover {
+  background-color: #630000;
+}
+
+#lend .positioner {
+  font-size: 1.15em;
+}

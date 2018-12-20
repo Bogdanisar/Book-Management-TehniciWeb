@@ -1,0 +1,121 @@
+<html>
+<head>
+  <title>Book management</title>
+    <meta charset="utf-8" />
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="main.js"></script>
+
+  <link rel="icon" type="image/png" href="img/favicon.png">
+  <link rel="stylesheet" href="main.css"></link>
+</head>
+
+<body>
+
+<div id="app">
+
+  <div id="header">
+    <div id="headerTop"> 
+      <div class="positioner"> <h1> <a href="index.html"> Book management </a> </h1> </div>
+    </div>
+
+    <div id="sepA" class="sep"></div>
+
+    <div id="headerLeft" class = "navigation">
+      <a href="index.html" on><div> Books </div></a>
+      <a href="friendsUser.html"><div> Friends </div></a>
+    </div>
+
+    <div id="headerRight" class="navigation">
+      <a href="index.html" on><div> User </div></a>
+      <a href="booksAdmin.html"><div> Admin </div></a>
+    </div>
+
+    <div id="sepB" class="sep"></div>
+  </div>
+
+  <div id="content">
+
+    <h3> Books that are not borrowed: </h3>
+    <template v-if="loaded">
+      <template v-for="(book, key) in hereBooks">
+        <div class="book" v-if="filterBook(key, 0)" v-bind:myLink="book.pictureLink" onclick="updateImage(this.getAttribute('myLink'));" >
+          <div class="title"> 
+            <div class="positioner"> Title: <br> <b>{{book.bookName}}</b> </div> 
+          </div>
+          <div class="author"> 
+            <div class="positioner"> Author: <br> <b>{{book.author}}</b> </div> 
+          </div>
+          <div class="genres"> 
+            <div class="positioner"> Genres: <br> 
+              <span v-for="(genre, index) in book.genres"> 
+                <span v-if="index == book.genres.length-1"> <b>{{genre}} </b> </span>
+                <span v-else> <b>{{genre}}, </b> </span>
+              </span> 
+            </div> 
+          </div>
+        </div>    
+      </template>
+
+      <h5 v-if="booksThatMatch[0] == 0"> There are no books that you have that match that search criteria! </h5>
+
+    </template>
+    <h5 v-else>The books are not loaded yet!</h5>
+
+    <h3> Books that are borrowed: </h3>
+    <template v-if="loaded">
+      <template v-for="(book, key) in awayBooks">
+        <div class="awayBook" v-if="filterBook(key, 1)" v-bind:myLink="book.pictureLink" onclick="updateImage(this.getAttribute('myLink'));" >
+          <div class="title"> 
+            <div class="positioner"> Title: <br> <b>{{book.bookName}}</b> </div> 
+          </div>
+          <div class="author"> 
+            <div class="positioner"> Author: <br> <b>{{book.author}}</b> </div> 
+          </div>
+          <div class="friend"> 
+            <div class="positioner"> Friend: <br> <b>{{friends[book.holderKey].name}}</b> </div> 
+          </div>
+          <div class="genres"> 
+            <div class="positioner"> Genres: <br> 
+              <span v-for="(genre, index) in book.genres"> 
+                <span v-if="index == book.genres.length-1"> <b>{{genre}} </b> </span>
+                <span v-else> <b>{{genre}}, </b> </span>
+              </span> 
+            </div> 
+          </div>
+        </div>      
+      </template>
+
+      <h5 v-if="booksThatMatch[1] == 0"> There are no borrowed books that match that search criteria! </h5>
+
+    </template>
+    <h5 v-else>The books are not loaded yet!</h5>
+
+  </div>
+
+  <div id="sidebar">
+
+    <div id="searchDiv">
+      <h4 class="header"> Search </h4>
+      <div class="container"> <input type="text" id="searchString" style="width:100%" v-on:change="forceUpdate()" v-on:keydown="forceUpdate()"> </div>
+      <div class="container" style="text-align: center;"> 
+        <h5 class="header"> Search By: </h5>
+        <label for="titleRadio"> Title </label> <input type="radio" name="searchType" value="title" id="titleRadio" v-on:change="forceUpdate()" checked>
+        <label for="authorRadio"> Author </label> <input type="radio" name="searchType" value="author" id="authorRadio" v-on:change="forceUpdate()">
+        <label for="genreRadio"> Genre </label> <input type="radio" name="searchType" value="genre" id="genreRadio" v-on:change="forceUpdate()">
+      </div>
+    </div>
+
+    <div id="cover-wrapper">
+      <div class="positioner">
+        <div style="position: relative; width: 100%; height: 100%;">
+          <img id="cover" src="img/defaultCover.png" alt="Book Cover">
+        </div>
+      </div>
+    </div>
+    
+  </div>
+
+</div>
+</body>
+</html>
